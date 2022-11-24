@@ -1,4 +1,4 @@
-﻿namespace EasyTest.DBs;
+﻿namespace EasyTest;
 
 public interface ITestDb
 {

@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
+using SqlLite;
 
 namespace EasyTest.Tests;
 
@@ -10,13 +10,12 @@ public class Tests
     [OneTimeSetUp]
     public async Task Setup()
     {
-        var app = TestApplication
+        var app = TestApplication<WebAPIExample.Program>
             .Create();
 
         app
             .AddInMemorySqlLite()
             .AddContext<DbContext>();
-        app.AddInMemoryMongo();
 
         var client = app.Start();
     }

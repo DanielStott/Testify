@@ -1,10 +1,8 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+﻿using EasyTest;
 using Microsoft.Extensions.Logging.Abstractions;
 using Mongo2Go;
-using MongoDB.Driver;
 
-namespace EasyTest.DBs;
+namespace Mongo;
 
 public class Mongo : ITestDb, IDisposable
 {
@@ -12,9 +10,9 @@ public class Mongo : ITestDb, IDisposable
     public string DatabaseName { get; } 
     public MongoDbRunner Runner { get; }
 
-    public Mongo(string name)
+    public Mongo()
     {
-        DatabaseName = name;
+        DatabaseName = Guid.NewGuid().ToString();
         Runner = MongoDbRunner.Start(logger: NullLogger.Instance);
     }
     

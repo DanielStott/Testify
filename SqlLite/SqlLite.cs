@@ -1,6 +1,7 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using EasyTest;
+using Microsoft.Data.Sqlite;
 
-namespace EasyTest.DBs;
+namespace SqlLite;
 
 public class SqlLite : ITestDb, IDisposable
 {
@@ -13,7 +14,7 @@ public class SqlLite : ITestDb, IDisposable
         Connection = new SqliteConnection("DataSource=:memory:");
         Connection.Open(); 
     }
-    
+
     public void Dispose()
         => Connection.Dispose();
 }
