@@ -1,8 +1,8 @@
 using System.Net.Http.Json;
 using Core;
 using SqlLite;
-using WebAPIExample;
-using WebAPIExample.Repository;
+using SqlLiteWebApiExample;
+using SqlLiteWebApiExample.Repository;
 
 namespace Tests;
 

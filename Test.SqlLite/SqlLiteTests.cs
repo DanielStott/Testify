@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Json;
-using WebAPIExample;
+using SqlLiteWebApiExample;
 
 namespace Tests;
 

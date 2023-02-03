@@ -1,8 +1,9 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using WebAPIExample.Repository;
+using SqlLiteWebApiExample.Repository;
 
-namespace WebAPIExample;
+namespace SqlLiteWebApiExample;
+
 public class Program {
     private static SqliteConnection? _connection;
 

@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLite", "SqlLite\SqlLite.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{D6BBA784-570A-4069-99DA-120906664CFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLiteWebAPIExample", "SqlLiteWebAPIExample\SqlLiteWebAPIExample.csproj", "{ED723202-727B-4E1A-BAF5-6D5B0022E7B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLiteWebApiExample", "SqlLiteWebApiExample\SqlLiteWebApiExample.csproj", "{ED723202-727B-4E1A-BAF5-6D5B0022E7B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo", "Mongo\Mongo.csproj", "{2F764AAE-19FD-418A-8F58-C4BD8DBB9279}"
 EndProject
