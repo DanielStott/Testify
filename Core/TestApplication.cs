@@ -23,7 +23,7 @@ public class TestApplication<T> : WebApplicationFactory<T> where T : class
         return testApplication;
     }
 
-    public HttpClient? Start()
+    public HttpClient Start()
         => Client ??= CreateClient();
 
     public TResponse? GetService<TResponse>() where TResponse : class
