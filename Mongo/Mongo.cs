@@ -1,4 +1,4 @@
-﻿using EasyTest;
+﻿using Core;
 using Microsoft.Extensions.Logging.Abstractions;
 using Mongo2Go;
 

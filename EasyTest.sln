@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{5E2F649C-37F2-478F-BE4F-287D58961CFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTest.Tests", "EasyTest.Tests\EasyTest.Tests.csproj", "{7B1332C8-03FD-4E7C-BB09-0A7575971D78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{7B1332C8-03FD-4E7C-BB09-0A7575971D78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLite", "SqlLite\SqlLite.csproj", "{5E6B13F0-E2B7-4B96-A16E-AEFC089D6F37}"
 EndProject

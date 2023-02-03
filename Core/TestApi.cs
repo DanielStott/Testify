@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace EasyTest;
+namespace Core;
 
 
 [SetUpFixture]

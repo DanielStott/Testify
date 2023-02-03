@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 
-namespace EasyTest;
+namespace Core;
 
 public abstract class TestApplication : TestApplication<Program> {}
 public class TestApplication<T> : WebApplicationFactory<T> where T : class
@@ -23,7 +23,7 @@ public class TestApplication<T> : WebApplicationFactory<T> where T : class
         return testApplication;
     }
 
-    public HttpClient Start()
+    public HttpClient? Start()
         => Client ??= CreateClient();
 
     public TResponse? GetService<TResponse>() where TResponse : class

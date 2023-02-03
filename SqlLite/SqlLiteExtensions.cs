@@ -1,4 +1,5 @@
-﻿using EasyTest;
+﻿using System.Reflection;
+using Core;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,26 @@ public static class SqlLiteExtensions
         });
         return builders;
     }
+    
+    // public static (IWebHostBuilder, SqlLite) ScanForDbContexts(this (IWebHostBuilder, SqlLite) builders, Assembly[] assemblies)
+    // {
+    //     builders.Item1.ConfigureServices(services =>
+    //     {
+    //         foreach (var assembly in assemblies)
+    //         {
+    //             assembly.GetTypes()
+    //                 .Where(t => t.IsSubclassOf(typeof(DbContext)))
+    //                 .ToList()
+    //                 .ForEach(t =>
+    //                 {
+    //                     var test = new DbContextOptionsBuilder();
+    //                     services.RemoveAll(t);
+    //                     // services.AddDbContext<>(options => options.UseSqlite(builders.Item2.Connection));
+    //                 });
+    //         }
+    //     });
+    //     return builders;
+    // } 
     
     private static SqlLite AddSqlLite<T>(this TestApplication<T> testApplication) where T : class
     {

@@ -1,11 +1,17 @@
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using WebAPIExample.Repository;
 
 namespace WebAPIExample;
 public class Program {
-    public static void Main(string[] args) {
+    private static SqliteConnection? _connection;
+
+    public static async Task Main(string[] args) {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddSqlite<WeatherForecastContext>(builder.Configuration.GetConnectionString("DefaultConnection"));
+        _connection = new SqliteConnection("DataSource=:memory:");
+        _connection.Open(); 
+        builder.Services.AddDbContext<WeatherForecastContext>(options => options.UseSqlite(_connection));
         builder.Services.AddControllers();
 
         var app = builder.Build();
@@ -16,6 +22,14 @@ public class Program {
 
         app.MapControllers();
 
-        app.Run();
+        await SetupDatabase(app);
+        await app.RunAsync();
+    }
+
+    private async static Task SetupDatabase(IHost app)
+    {
+        using var serviceScope = app.Services.CreateScope();
+        var context = serviceScope.ServiceProvider.GetService<WeatherForecastContext>();
+        await context!.Database.EnsureCreatedAsync();
     }
 }

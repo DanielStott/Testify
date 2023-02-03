@@ -1,4 +1,4 @@
-﻿using EasyTest;
+﻿using Core;
 using Microsoft.Data.Sqlite;
 
 namespace SqlLite;

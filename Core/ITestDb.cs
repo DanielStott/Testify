@@ -1,4 +1,4 @@
-﻿namespace EasyTest;
+﻿namespace Core;
 
 public interface ITestDb
 {

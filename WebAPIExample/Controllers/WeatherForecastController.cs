@@ -9,17 +9,15 @@ namespace WebAPIExample.Controllers;
 public class WeatherForecastController : ControllerBase
 {
     private readonly WeatherForecastContext _weatherForecastContext;
-    private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(WeatherForecastContext weatherForecastContext, ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(WeatherForecastContext weatherForecastContext)
     {
         _weatherForecastContext = weatherForecastContext;
-        _logger = logger;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast>? Get()
+    public async Task<List<WeatherForecast>> Get()
     {
-        return _weatherForecastContext.WeatherForecasts;
+        return await _weatherForecastContext.WeatherForecasts!.ToListAsync();
     }
 }
