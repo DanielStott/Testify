@@ -1,9 +1,8 @@
 using Core;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using SqlLite;
 using SqlLiteWebApiExample.Repository;
 
-namespace Tests;
+namespace Test.SqlLite;
 
 [SetUpFixture]
 public class TestFixture

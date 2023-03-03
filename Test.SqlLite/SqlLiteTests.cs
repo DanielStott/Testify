@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Json;
 using SqlLiteWebApiExample;
-using Tests;
 
 namespace Test.SqlLite;
 
