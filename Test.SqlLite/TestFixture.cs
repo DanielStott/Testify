@@ -1,13 +1,12 @@
-using System.Net.Http.Json;
 using Core;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 using SqlLite;
-using SqlLiteWebApiExample;
 using SqlLiteWebApiExample.Repository;
 
 namespace Tests;
 
 [SetUpFixture]
-public class TestFixture 
+public class TestFixture
 {
     public static HttpClient Client { get; private set; }
 

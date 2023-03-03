@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Core;
+﻿using Core;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +10,7 @@ public static class SqlLiteExtensions
 {
     public static (IWebHostBuilder Builder, SqlLite) AddInMemorySqlLite<T>(this TestApplication<T> testApplication) where T : class
         => (testApplication.Builder, testApplication.AddSqlLite());
-    
+
     public static (IWebHostBuilder, SqlLite) AddContext<T>(this (IWebHostBuilder, SqlLite) builders) where T : DbContext
     {
         builders.Item1.ConfigureServices(services =>
@@ -21,7 +20,7 @@ public static class SqlLiteExtensions
         });
         return builders;
     }
-    
+
     // public static (IWebHostBuilder, SqlLite) ScanForDbContexts(this (IWebHostBuilder, SqlLite) builders, Assembly[] assemblies)
     // {
     //     builders.Item1.ConfigureServices(services =>
@@ -40,8 +39,8 @@ public static class SqlLiteExtensions
     //         }
     //     });
     //     return builders;
-    // } 
-    
+    // }
+
     private static SqlLite AddSqlLite<T>(this TestApplication<T> testApplication) where T : class
     {
         var sqlLite = new SqlLite();

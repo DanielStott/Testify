@@ -6,8 +6,8 @@ namespace Mongo;
 
 public class Mongo : ITestDb, IDisposable
 {
-    public string ConnectionString => Runner.ConnectionString; 
-    public string DatabaseName { get; } 
+    public string ConnectionString => Runner.ConnectionString;
+    public string DatabaseName { get; }
     public MongoDbRunner Runner { get; }
 
     public Mongo()
@@ -15,7 +15,7 @@ public class Mongo : ITestDb, IDisposable
         DatabaseName = Guid.NewGuid().ToString();
         Runner = MongoDbRunner.Start(logger: NullLogger.Instance);
     }
-    
+
     public void Dispose()
         => Runner.Dispose();
 }

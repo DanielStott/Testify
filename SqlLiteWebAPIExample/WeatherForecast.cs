@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WebAPIExample;
+namespace SqlLiteWebApiExample;
 
 public class WeatherForecast
 {

@@ -15,11 +15,11 @@ public class TestApplication<T> : WebApplicationFactory<T> where T : class
         => Builder = CreateWebHostBuilder() ?? new WebHostBuilder();
 
     public static TestApplication<T> Create() => new ();
-    
+
     public static TestApplication<T> Create(Action<IWebHostBuilder> configure)
     {
         var testApplication = new TestApplication<T>();
-        testApplication.WithWebHostBuilder(configure); 
+        testApplication.WithWebHostBuilder(configure);
         return testApplication;
     }
 

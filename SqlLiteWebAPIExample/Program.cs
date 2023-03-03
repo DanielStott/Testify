@@ -2,35 +2,26 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using SqlLiteWebApiExample.Repository;
 
-namespace SqlLiteWebApiExample;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program {
-    private static SqliteConnection? _connection;
+var connection = new SqliteConnection("DataSource=:memory:");
+connection.Open();
+builder.Services.AddDbContext<WeatherForecastContext>(options => options.UseSqlite(connection));
+builder.Services.AddControllers();
 
-    public static async Task Main(string[] args) {
-        var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
 
-        _connection = new SqliteConnection("DataSource=:memory:");
-        _connection.Open(); 
-        builder.Services.AddDbContext<WeatherForecastContext>(options => options.UseSqlite(_connection));
-        builder.Services.AddControllers();
+app.UseHttpsRedirection();
 
-        var app = builder.Build();
+app.UseAuthorization();
 
-        app.UseHttpsRedirection();
+app.MapControllers();
 
-        app.UseAuthorization();
+using var serviceScope = app.Services.CreateScope();
+var context = serviceScope.ServiceProvider.GetService<WeatherForecastContext>();
+await context!.Database.EnsureCreatedAsync();
 
-        app.MapControllers();
+await app.RunAsync();
 
-        await SetupDatabase(app);
-        await app.RunAsync();
-    }
-
-    private async static Task SetupDatabase(IHost app)
-    {
-        using var serviceScope = app.Services.CreateScope();
-        var context = serviceScope.ServiceProvider.GetService<WeatherForecastContext>();
-        await context!.Database.EnsureCreatedAsync();
-    }
-}
+// Make the implicit Program class public so test projects can access it
+public partial class Program { }

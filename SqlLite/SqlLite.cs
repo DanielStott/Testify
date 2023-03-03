@@ -12,7 +12,7 @@ public class SqlLite : ITestDb, IDisposable
     public SqlLite()
     {
         Connection = new SqliteConnection("DataSource=:memory:");
-        Connection.Open(); 
+        Connection.Open();
     }
 
     public void Dispose()
