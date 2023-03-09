@@ -9,14 +9,10 @@ public class WeatherForecastController : ControllerBase
 {
     private readonly WeatherForecastRepository _weatherForecastRepository;
 
-    public WeatherForecastController(WeatherForecastRepository weatherForecastRepository)
-    {
+    public WeatherForecastController(WeatherForecastRepository weatherForecastRepository) =>
         _weatherForecastRepository = weatherForecastRepository;
-    }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public async Task<IEnumerable<WeatherForecast>> Get()
-    {
-        return await _weatherForecastRepository.GetAll();
-    }
+    public async Task<IEnumerable<WeatherForecast>> Get() =>
+        await _weatherForecastRepository.GetAll();
 }
