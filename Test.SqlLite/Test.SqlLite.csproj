@@ -16,7 +16,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Core\Core.csproj" />
       <ProjectReference Include="..\SqlLite\SqlLite.csproj" />
-      <ProjectReference Include="..\SqlLiteWebApiExample\SqlLiteWebApiExample.csproj" />
+      <ProjectReference Include="..\SqlLiteWebApi\SqlLiteWebApi.csproj" />
     </ItemGroup>
 
 </Project>

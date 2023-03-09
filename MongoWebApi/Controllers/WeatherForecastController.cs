@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using MongoWebApiExample.Data;
+using MongoWebApi.Data;
 
-namespace MongoWebApiExample.Controllers;
+namespace MongoWebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

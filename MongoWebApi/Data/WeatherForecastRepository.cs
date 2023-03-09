@@ -1,7 +1,7 @@
 ﻿using Mongo2Go;
 using MongoDB.Driver;
 
-namespace MongoWebApiExample.Data;
+namespace MongoWebApi.Data;
 
 public class WeatherForecastRepository
 {

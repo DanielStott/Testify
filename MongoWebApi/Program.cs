@@ -2,8 +2,8 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Mongo2Go;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
-using MongoWebApiExample;
-using MongoWebApiExample.Data;
+using MongoWebApi;
+using MongoWebApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

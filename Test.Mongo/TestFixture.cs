@@ -14,8 +14,7 @@ public class TestFixture
         var app = TestApplication<Program>
             .Create();
 
-        app
-            .AddInMemoryMongo();
+        app.AddInMemoryMongo();
 
         Client = app.Start();
     }

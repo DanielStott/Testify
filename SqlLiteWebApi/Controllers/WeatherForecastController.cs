@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SqlLiteWebApiExample.Data;
+using SqlLiteWebApi.Data;
 
-namespace SqlLiteWebApiExample.Controllers;
+namespace SqlLiteWebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

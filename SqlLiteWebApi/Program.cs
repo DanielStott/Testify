@@ -1,6 +1,6 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using SqlLiteWebApiExample.Data;
+using SqlLiteWebApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

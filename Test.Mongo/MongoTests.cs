@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Json;
-using MongoWebApiExample;
+using MongoWebApi;
 
 namespace Test.Mongo;
 

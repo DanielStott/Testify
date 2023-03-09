@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MongoWebApiExample;
+namespace MongoWebApi;
 
 public class WeatherForecast
 {
