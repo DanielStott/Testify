@@ -1,14 +1,15 @@
 ﻿using System.Net.Http.Json;
+using Core;
 using SqlLiteWebApi;
 
 namespace Test.SqlLite;
 
-public class SqlLiteTests
+public class SqlLiteTests : BaseTest<Program>
 {
     [Test]
     public async Task get_weather_forecasts()
     {
-        var responseMessage = await TestFixture.Client.GetAsync("/WeatherForecast");
+        var responseMessage = await Api.GetAsync("/WeatherForecast");
         var weatherForecasts = await responseMessage.Content.ReadFromJsonAsync<IEnumerable<WeatherForecast>>();
         Assert.That(weatherForecasts?.Count(), Is.EqualTo(3));
     }
