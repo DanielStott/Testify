@@ -10,6 +10,6 @@ public class SqlLiteTests
     {
         var responseMessage = await TestFixture.Client.GetAsync("/WeatherForecast");
         var weatherForecasts = await responseMessage.Content.ReadFromJsonAsync<IEnumerable<WeatherForecast>>();
-        Assert.That(weatherForecasts.Count(), Is.EqualTo(3));
+        Assert.That(weatherForecasts?.Count(), Is.EqualTo(3));
     }
 }
