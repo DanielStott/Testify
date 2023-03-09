@@ -9,6 +9,12 @@ public class WeatherForecastRepository
 
     public WeatherForecastRepository(MongoDbRunner runner) => _client = new MongoClient(runner.ConnectionString);
 
+    public async Task CreateCollection()
+    {
+        var database = _client.GetDatabase("WeatherForecastDb");
+        await database.CreateCollectionAsync("WeatherForecasts");
+    }
+
     public async Task<List<WeatherForecast>> GetAll() =>
         (await _client
             .GetDatabase("WeatherForecastDb")

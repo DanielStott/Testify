@@ -6,7 +6,7 @@ public class WeatherForecast
 {
     [Key]
     public Guid Id { get; set; }
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
 
     public int TemperatureC { get; set; }
 
@@ -14,7 +14,7 @@ public class WeatherForecast
 
     public string? Summary { get; set; }
 
-    public WeatherForecast(DateOnly date, int temperatureC, string? summary)
+    public WeatherForecast(DateTime date, int temperatureC, string? summary)
     {
         Id = Guid.NewGuid();
         Date = date;
