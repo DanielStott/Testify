@@ -6,7 +6,7 @@ namespace Test.SqlLite;
 public class SqlLiteTests
 {
     [Test]
-    public async Task can_get_weather_forecasts()
+    public async Task get_weather_forecasts()
     {
         var responseMessage = await TestFixture.Client.GetAsync("/WeatherForecast");
         var weatherForecasts = await responseMessage.Content.ReadFromJsonAsync<IEnumerable<WeatherForecast>>();

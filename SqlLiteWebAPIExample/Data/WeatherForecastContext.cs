@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace SqlLiteWebApiExample.Repository;
+namespace SqlLiteWebApiExample.Data;
 
 public class WeatherForecastContext : DbContext
 {

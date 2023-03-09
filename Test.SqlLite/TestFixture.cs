@@ -1,6 +1,6 @@
 using Core;
 using SqlLite;
-using SqlLiteWebApiExample.Repository;
+using SqlLiteWebApiExample.Data;
 
 namespace Test.SqlLite;
 

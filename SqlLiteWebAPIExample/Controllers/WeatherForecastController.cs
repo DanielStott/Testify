@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SqlLiteWebApiExample.Repository;
+using SqlLiteWebApiExample.Data;
 
 namespace SqlLiteWebApiExample.Controllers;
 
