@@ -16,8 +16,6 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public async Task<List<WeatherForecast>> Get()
-    {
-        return await _weatherForecastContext.WeatherForecasts!.ToListAsync();
-    }
+    public async Task<List<WeatherForecast>> Get() =>
+        await _weatherForecastContext.WeatherForecasts!.ToListAsync();
 }

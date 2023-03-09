@@ -1,9 +1,12 @@
+using Mongo2Go;
+using MongoWebApiExample;
+using MongoWebApiExample.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// var connection = new SqliteConnection("DataSource=:memory:");
-// connection.Open();
-// builder.Services.AddDbContext<WeatherForecastContext>(options => options.UseSqlite(connection));
 builder.Services.AddControllers();
+builder.Services.AddSingleton<MongoDbRunner>(_ => MongoDbRunner.Start());
+builder.Services.AddTransient<WeatherForecastRepository>();
 
 var app = builder.Build();
 
@@ -14,8 +17,13 @@ app.UseAuthorization();
 app.MapControllers();
 
 using var serviceScope = app.Services.CreateScope();
-// var context = serviceScope.ServiceProvider.GetService<WeatherForecastContext>();
-// await context!.Database.EnsureCreatedAsync();
+var repo = serviceScope.ServiceProvider.GetService<WeatherForecastRepository>();
+await repo?.AddRange(new[]
+{
+    new WeatherForecast(new DateOnly(2022, 1, 1), 15, "Summary 1"),
+    new WeatherForecast(new DateOnly(2022, 1, 2), 20, "Summary 2"),
+    new WeatherForecast(new DateOnly(2022, 1, 3), 25, "Summary 3")
+})!;
 
 await app.RunAsync();
 
