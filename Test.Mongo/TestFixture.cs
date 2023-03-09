@@ -6,8 +6,6 @@ namespace Test.Mongo;
 [SetUpFixture]
 public class TestFixture
 {
-    public static HttpClient Client { get; private set; }
-
     [OneTimeSetUp]
     public void Setup()
     {
@@ -16,6 +14,6 @@ public class TestFixture
 
         app.AddInMemoryMongo();
 
-        Client = app.Start();
+        app.Start();
     }
 }
