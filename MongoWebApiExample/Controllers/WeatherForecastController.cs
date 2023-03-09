@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MongoDbWebApiExample.Controllers;
+namespace MongoWebApiExample.Controllers;
 
 [ApiController]
 [Route("[controller]")]

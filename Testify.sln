@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo", "Mongo\Mongo.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A5DA8BBC-30C3-480D-870A-0D5F516075A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbWebApiExample", "MongoDbWebApiExample\MongoDbWebApiExample.csproj", "{DC05138F-FAE6-4BE2-9233-497EE4D53495}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoWebApiExample", "MongoWebApiExample\MongoWebApiExample.csproj", "{DC05138F-FAE6-4BE2-9233-497EE4D53495}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

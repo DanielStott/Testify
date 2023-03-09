@@ -1,4 +1,4 @@
-namespace MongoDbWebApiExample;
+namespace MongoWebApiExample;
 
 public class WeatherForecast
 {
