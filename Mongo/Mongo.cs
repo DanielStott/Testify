@@ -4,7 +4,7 @@ using Mongo2Go;
 
 namespace Mongo;
 
-public class Mongo : ITestDb, IDisposable
+public class Mongo : ITestDb
 {
     public string ConnectionString => Runner.ConnectionString;
     public string DatabaseName { get; }

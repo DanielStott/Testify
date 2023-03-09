@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 namespace Core;
 
 public abstract class TestApplication : TestApplication<Program> {}
-public class TestApplication<T> : WebApplicationFactory<T> where T : class
+public class TestApplication<T> : WebApplicationFactory<T>, IDisposable where T : class
 {
     public IWebHostBuilder Builder { get; }
     public List<ITestDb> Dbs { get; set; } = new();
@@ -34,5 +34,12 @@ public class TestApplication<T> : WebApplicationFactory<T> where T : class
         return scope
             .ServiceProvider
             .GetService<TResponse>();
+    }
+
+    public void Dispose()
+    {
+        foreach (var db in Dbs)
+            db.Dispose();
+        base.Dispose();
     }
 }
