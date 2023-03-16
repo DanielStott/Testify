@@ -8,6 +8,8 @@ namespace Core;
 public interface ITestApplication : IDisposable
 {
     HttpClient GetClient();
+    List<ITestDb> Dbs { get; }
+    Action<IHostBuilder, ITestApplication> Configuration { get; set; }
 }
 
 public sealed class TestApplication<T> : WebApplicationFactory<T>, ITestApplication where T : class
@@ -15,12 +17,12 @@ public sealed class TestApplication<T> : WebApplicationFactory<T>, ITestApplicat
     public IWebHostBuilder Builder { get; }
     public List<ITestDb> Dbs { get; } = new();
     private HttpClient? _client;
-    public Action<IHostBuilder, TestApplication<T>> Configuration { get; set; }
+    public Action<IHostBuilder, ITestApplication> Configuration { get; set; }
 
     private TestApplication()
         => Builder = CreateWebHostBuilder() ?? new WebHostBuilder();
 
-    private TestApplication(Action<IHostBuilder, TestApplication<T>> configuration) => Configuration = configuration;
+    private TestApplication(Action<IHostBuilder, ITestApplication> configuration) => Configuration = configuration;
 
     public static TestApplication<T> Create()
     {
@@ -35,7 +37,7 @@ public sealed class TestApplication<T> : WebApplicationFactory<T>, ITestApplicat
         return base.CreateHost(builder);
     }
 
-    public static TestApplication<T> Create(Action<IHostBuilder, TestApplication<T>> configureHost)
+    public static TestApplication<T> Create(Action<IHostBuilder, ITestApplication> configureHost)
     {
         var instance = new TestApplication<T>(configureHost);
         Test.Instance = instance;

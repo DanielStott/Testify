@@ -1,5 +1,4 @@
 ﻿using Core;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -9,10 +8,10 @@ namespace SqlLite;
 
 public static class SqlLiteExtensions
 {
-    public static (TestApplication<T> Application, SqlLite) AddInMemorySqlLite<T>(this TestApplication<T> testApplication) where T : class
+    public static (ITestApplication Application, SqlLite) AddInMemorySqlLite(this ITestApplication testApplication)
         => (testApplication, testApplication.AddSqlLite());
 
-    public static void AddContext<TContext, T>(this (TestApplication<T> Application, SqlLite sqlLite) builders) where TContext : DbContext where T : class
+    public static void AddContext<TContext>(this (ITestApplication Application, SqlLite sqlLite) builders) where TContext : DbContext
     {
         builders.Application.Configuration += (builder, _) =>
         {
@@ -24,7 +23,7 @@ public static class SqlLiteExtensions
         };
     }
 
-    private static SqlLite AddSqlLite<T>(this TestApplication<T> testApplication) where T : class
+    private static SqlLite AddSqlLite(this ITestApplication testApplication)
     {
         var sqlLite = new SqlLite();
         testApplication.Dbs.Add(sqlLite);
