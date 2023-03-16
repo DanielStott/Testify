@@ -15,12 +15,12 @@ public sealed class TestApplication<T> : WebApplicationFactory<T>, ITestApplicat
     public IWebHostBuilder Builder { get; }
     public List<ITestDb> Dbs { get; } = new();
     private HttpClient? _client;
-    private readonly Action<IHostBuilder> _configureHost;
+    public Action<IHostBuilder> ConfigureHost { get; set; }
 
     private TestApplication()
         => Builder = CreateWebHostBuilder() ?? new WebHostBuilder();
 
-    private TestApplication(Action<IHostBuilder> configureHost) => _configureHost = configureHost;
+    private TestApplication(Action<IHostBuilder> configureHost) => ConfigureHost = configureHost;
 
     public static TestApplication<T> Create()
     {
@@ -31,7 +31,7 @@ public sealed class TestApplication<T> : WebApplicationFactory<T>, ITestApplicat
 
     protected override IHost CreateHost(IHostBuilder builder)
     {
-        _configureHost.Invoke(builder);
+        ConfigureHost.Invoke(builder);
         return base.CreateHost(builder);
     }
 

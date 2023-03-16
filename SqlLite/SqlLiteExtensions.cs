@@ -3,21 +3,25 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 
 namespace SqlLite;
 
 public static class SqlLiteExtensions
 {
-    public static (IWebHostBuilder Builder, SqlLite) AddInMemorySqlLite<T>(this TestApplication<T> testApplication) where T : class
-        => (testApplication.Builder, testApplication.AddSqlLite());
+    public static (Action<IHostBuilder> ConfigureHost, SqlLite) AddInMemorySqlLite<T>(this TestApplication<T> testApplication) where T : class
+        => (testApplication.ConfigureHost, testApplication.AddSqlLite());
 
-    public static (IWebHostBuilder, SqlLite) AddContext<T>(this (IWebHostBuilder webHostBuilder, SqlLite) builders) where T : DbContext
+    public static (Action<IHostBuilder> hostAction, SqlLite) AddContext<T>(this (Action<IHostBuilder> hostAction, SqlLite sqlLite) builders) where T : DbContext
     {
-        builders.webHostBuilder.ConfigureServices(services =>
+        builders.hostAction += builder =>
         {
-            services.RemoveAll<T>();
-            services.AddDbContext<T>(options => options.UseSqlite(builders.Item2.Connection));
-        });
+            builder.ConfigureServices(services =>
+            {
+                services.RemoveAll<T>();
+                services.AddDbContext<T>(options => options.UseSqlite(builders.sqlLite.Connection));
+            });
+        };
         return builders;
     }
 
