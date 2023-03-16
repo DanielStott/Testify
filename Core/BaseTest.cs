@@ -9,7 +9,8 @@ public class BaseTest<T> where T : class
     [SetUp]
     public virtual Task Setup()
     {
-        Api = TestApplication<T>.Instance?.GetClient() ?? throw new InvalidOperationException("Create Test Application");
+        Api = TestApplication<T>.Instance?.GetClient() ??
+              throw new InvalidOperationException("Create a new instance of TestApplication<T> before calling using BaseTest<T>");
         return Task.CompletedTask;
     }
 
