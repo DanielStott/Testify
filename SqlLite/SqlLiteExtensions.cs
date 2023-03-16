@@ -9,20 +9,19 @@ namespace SqlLite;
 
 public static class SqlLiteExtensions
 {
-    public static (Action<IHostBuilder> ConfigureHost, SqlLite) AddInMemorySqlLite<T>(this TestApplication<T> testApplication) where T : class
-        => (testApplication.ConfigureHost, testApplication.AddSqlLite());
+    public static (TestApplication<T> Application, SqlLite) AddInMemorySqlLite<T>(this TestApplication<T> testApplication) where T : class
+        => (testApplication, testApplication.AddSqlLite());
 
-    public static (Action<IHostBuilder> hostAction, SqlLite) AddContext<T>(this (Action<IHostBuilder> hostAction, SqlLite sqlLite) builders) where T : DbContext
+    public static void AddContext<TContext, T>(this (TestApplication<T> Application, SqlLite sqlLite) builders) where TContext : DbContext where T : class
     {
-        builders.hostAction += builder =>
+        builders.Application.Configuration += (builder, _) =>
         {
             builder.ConfigureServices(services =>
             {
-                services.RemoveAll<T>();
-                services.AddDbContext<T>(options => options.UseSqlite(builders.sqlLite.Connection));
+                services.RemoveAll<TContext>();
+                services.AddDbContext<TContext>(options => options.UseSqlite(builders.sqlLite.Connection));
             });
         };
-        return builders;
     }
 
     private static SqlLite AddSqlLite<T>(this TestApplication<T> testApplication) where T : class

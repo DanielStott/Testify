@@ -13,10 +13,11 @@ public class TestFixture
     public void Setup()
     {
         _app = TestApplication<Program>
-            .Create();
-        _app
-            .AddInMemorySqlLite()
-                .AddContext<WeatherForecastContext>();
+            .Create((builder, app) =>
+            {
+                app.AddInMemorySqlLite()
+                    .AddContext<WeatherForecastContext, Program>();
+            });
 
         _app.Start();
     }
