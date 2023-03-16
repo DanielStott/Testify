@@ -9,10 +9,19 @@ public class WeatherForecastRepository
 
     public WeatherForecastRepository(MongoDbRunner runner) => _client = new MongoClient(runner.ConnectionString);
 
-    public async Task CreateCollection()
+    public void CreateCollection()
     {
+        if(_client.GetDatabase("WeatherForecastDb").ListCollectionNames().ToList().Contains("WeatherForecasts"))
+            return;
+
         var database = _client.GetDatabase("WeatherForecastDb");
-        await database.CreateCollectionAsync("WeatherForecasts");
+        database.CreateCollection("WeatherForecasts");
+        AddRange(new []
+        {
+            new WeatherForecast(new DateTime(2022, 1, 1), 15, "Summary 1"),
+            new WeatherForecast(new DateTime(2022, 1, 2), 20, "Summary 2"),
+            new WeatherForecast(new DateTime(2022, 1, 3), 25, "Summary 3")
+        });
     }
 
     public async Task<List<WeatherForecast>> GetAll() =>
@@ -22,9 +31,9 @@ public class WeatherForecastRepository
             .FindAsync(FilterDefinition<WeatherForecast>.Empty))
         .ToList();
 
-    public async Task AddRange(IEnumerable<WeatherForecast> weatherForecasts) =>
-        await _client
+    public void AddRange(IEnumerable<WeatherForecast> weatherForecasts) =>
+        _client
             .GetDatabase("WeatherForecastDb")
             .GetCollection<WeatherForecast>("WeatherForecasts")
-            .InsertManyAsync(weatherForecasts);
+            .InsertMany(weatherForecasts);
 }

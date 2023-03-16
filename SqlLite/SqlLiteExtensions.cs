@@ -11,7 +11,7 @@ public static class SqlLiteExtensions
     public static (ITestApplication Application, SqlLite) AddInMemorySqlLite(this ITestApplication testApplication)
         => (testApplication, testApplication.AddSqlLite());
 
-    public static void AddContext<TContext>(this (ITestApplication Application, SqlLite sqlLite) builders) where TContext : DbContext
+    public static (ITestApplication Application, SqlLite sqlLite) AddContext<TContext>(this (ITestApplication Application, SqlLite sqlLite) builders) where TContext : DbContext
     {
         builders.Application.Configuration += (builder, _) =>
         {
@@ -21,6 +21,7 @@ public static class SqlLiteExtensions
                 services.AddDbContext<TContext>(options => options.UseSqlite(builders.sqlLite.Connection));
             });
         };
+        return builders;
     }
 
     private static SqlLite AddSqlLite(this ITestApplication testApplication)

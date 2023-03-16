@@ -1,14 +1,13 @@
 ﻿using Core;
-using Microsoft.AspNetCore.Hosting;
 
 namespace Mongo;
 
 public static class MongoExtensions
 {
-    public static (IWebHostBuilder Builder, Mongo) AddInMemoryMongo<T>(this TestApplication<T> testApplication) where T : class
-        => (testApplication.Builder, testApplication.AddMongo());
+    public static (ITestApplication Application, Mongo) AddInMemoryMongo(this ITestApplication testApplication)
+        => (testApplication, testApplication.AddMongo());
 
-    private static Mongo AddMongo<T>(this TestApplication<T> testApplication) where T : class
+    private static Mongo AddMongo(this ITestApplication testApplication)
     {
         var mongo = new Mongo();
         testApplication.Dbs.Add(mongo);

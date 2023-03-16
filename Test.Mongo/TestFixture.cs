@@ -11,10 +11,7 @@ public class TestFixture
     [OneTimeSetUp]
     public void Setup()
     {
-        _app = TestApplication<Program>
-            .Create();
-
-        _app.AddInMemoryMongo();
+        _app = TestApplication<Program>.Create((_, application) => application.AddInMemoryMongo());
 
         _app.Start();
     }
