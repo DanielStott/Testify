@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace Core;
 
@@ -10,15 +9,14 @@ public interface ITestApplication : IDisposable
     HttpClient GetClient();
 }
 
-public abstract class TestApplication : TestApplication<Program> {}
-public class TestApplication<T> : WebApplicationFactory<T>, ITestApplication where T : class
+public sealed class TestApplication<T> : WebApplicationFactory<T>, ITestApplication where T : class
 {
 
     public IWebHostBuilder Builder { get; }
     public List<ITestDb> Dbs { get; } = new();
-    private HttpClient? Client;
+    private HttpClient? _client;
 
-    protected TestApplication()
+    private TestApplication()
         => Builder = CreateWebHostBuilder() ?? new WebHostBuilder();
 
     public static TestApplication<T> Create()
@@ -37,7 +35,7 @@ public class TestApplication<T> : WebApplicationFactory<T>, ITestApplication whe
     }
 
     public HttpClient Start()
-        => Client ??= CreateClient();
+        => _client ??= CreateClient();
 
     public HttpClient GetClient()
     {
