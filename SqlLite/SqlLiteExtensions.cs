@@ -11,9 +11,9 @@ public static class SqlLiteExtensions
     public static (IWebHostBuilder Builder, SqlLite) AddInMemorySqlLite<T>(this TestApplication<T> testApplication) where T : class
         => (testApplication.Builder, testApplication.AddSqlLite());
 
-    public static (IWebHostBuilder, SqlLite) AddContext<T>(this (IWebHostBuilder, SqlLite) builders) where T : DbContext
+    public static (IWebHostBuilder, SqlLite) AddContext<T>(this (IWebHostBuilder webHostBuilder, SqlLite) builders) where T : DbContext
     {
-        builders.Item1.ConfigureServices(services =>
+        builders.webHostBuilder.ConfigureServices(services =>
         {
             services.RemoveAll<T>();
             services.AddDbContext<T>(options => options.UseSqlite(builders.Item2.Connection));

@@ -2,11 +2,12 @@
 
 namespace SqlLiteWebApi.Data;
 
-public class WeatherForecastContext : DbContext
+public sealed class WeatherForecastContext : DbContext
 {
     public WeatherForecastContext(DbContextOptions options)
         : base(options)
     {
+        Database.EnsureCreated();
     }
 
     public DbSet<WeatherForecast> WeatherForecasts { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Core;
 
@@ -11,13 +12,15 @@ public interface ITestApplication : IDisposable
 
 public sealed class TestApplication<T> : WebApplicationFactory<T>, ITestApplication where T : class
 {
-
     public IWebHostBuilder Builder { get; }
     public List<ITestDb> Dbs { get; } = new();
     private HttpClient? _client;
+    private readonly Action<IHostBuilder> _configureHost;
 
     private TestApplication()
         => Builder = CreateWebHostBuilder() ?? new WebHostBuilder();
+
+    private TestApplication(Action<IHostBuilder> configureHost) => _configureHost = configureHost;
 
     public static TestApplication<T> Create()
     {
@@ -26,11 +29,16 @@ public sealed class TestApplication<T> : WebApplicationFactory<T>, ITestApplicat
         return instance;
     }
 
-    public static TestApplication<T> Create(Action<IWebHostBuilder> configure)
+    protected override IHost CreateHost(IHostBuilder builder)
     {
-        var instance = new TestApplication<T>();
+        _configureHost.Invoke(builder);
+        return base.CreateHost(builder);
+    }
+
+    public static TestApplication<T> Create(Action<IHostBuilder> configureHost)
+    {
+        var instance = new TestApplication<T>(configureHost);
         Test.Instance = instance;
-        instance.WithWebHostBuilder(configure);
         return instance;
     }
 

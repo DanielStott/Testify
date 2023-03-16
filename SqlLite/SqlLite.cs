@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 
 namespace SqlLite;
 
-public sealed class SqlLite : ITestDb
+public class SqlLite : ITestDb
 {
     public string ConnectionString => Connection.ConnectionString;
     public string DatabaseName => Connection.Database;

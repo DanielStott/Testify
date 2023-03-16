@@ -19,7 +19,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await SetupMongo(app);
+// Uncomment this to run locally
+// await SetupMongo(app);
 
 await app.RunAsync();
 
