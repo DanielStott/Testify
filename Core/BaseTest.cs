@@ -2,15 +2,15 @@
 
 namespace Core;
 
-public class BaseTest<T> where T : class
+public class BaseTest
 {
     protected HttpClient Api { get; private set; }
 
     [SetUp]
     public virtual Task Setup()
     {
-        Api = TestApplication<T>.Instance?.GetClient() ??
-              throw new InvalidOperationException("Create a new instance of TestApplication<T> before calling using BaseTest<T>");
+        Api = Test.Instance?.GetClient() ??
+              throw new InvalidOperationException("Create a new instance of TestApplication<T> before calling BaseTest<T>");
         return Task.CompletedTask;
     }
 

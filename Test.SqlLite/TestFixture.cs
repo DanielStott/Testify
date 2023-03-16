@@ -7,7 +7,7 @@ namespace Test.SqlLite;
 [SetUpFixture]
 public class TestFixture
 {
-    private TestApplication<Program>? _app;
+    private TestApplication<Program> _app;
 
     [OneTimeSetUp]
     public void Setup()

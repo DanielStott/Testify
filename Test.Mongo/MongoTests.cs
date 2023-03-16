@@ -4,7 +4,7 @@ using MongoWebApi;
 
 namespace Test.Mongo;
 
-public class MongoTests : BaseTest<Program>
+public class MongoTests : BaseTest
 {
     [Test]
     public async Task get_weather_forecasts()

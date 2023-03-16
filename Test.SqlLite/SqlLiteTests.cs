@@ -4,7 +4,7 @@ using SqlLiteWebApi;
 
 namespace Test.SqlLite;
 
-public class SqlLiteTests : BaseTest<Program>
+public class SqlLiteTests : BaseTest
 {
     [Test]
     public async Task get_dynamic_weather_forecasts()

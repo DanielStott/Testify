@@ -5,28 +5,35 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace Core;
 
-public abstract class TestApplication : TestApplication<Program> {}
-public class TestApplication<T> : WebApplicationFactory<T>, IDisposable where T : class
+public interface ITestApplication : IDisposable
 {
+    HttpClient GetClient();
+}
+
+public abstract class TestApplication : TestApplication<Program> {}
+public class TestApplication<T> : WebApplicationFactory<T>, ITestApplication where T : class
+{
+
     public IWebHostBuilder Builder { get; }
     public List<ITestDb> Dbs { get; } = new();
     private HttpClient? Client;
+
     protected TestApplication()
         => Builder = CreateWebHostBuilder() ?? new WebHostBuilder();
 
-    public static TestApplication<T>? Instance { get; private set; }
-
     public static TestApplication<T> Create()
     {
-        Instance = new TestApplication<T>();
-        return Instance;
+        var instance = new TestApplication<T>();
+        Test.Instance = instance;
+        return instance;
     }
 
     public static TestApplication<T> Create(Action<IWebHostBuilder> configure)
     {
-        Instance = new TestApplication<T>();
-        Instance.WithWebHostBuilder(configure);
-        return Instance;
+        var instance = new TestApplication<T>();
+        Test.Instance = instance;
+        instance.WithWebHostBuilder(configure);
+        return instance;
     }
 
     public HttpClient Start()
@@ -54,6 +61,6 @@ public class TestApplication<T> : WebApplicationFactory<T>, IDisposable where T 
     {
         foreach (var db in Dbs)
             db.Dispose();
-        base.Dispose();
+        base.Dispose(disposing);
     }
 }
