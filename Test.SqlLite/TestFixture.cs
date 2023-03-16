@@ -7,16 +7,21 @@ namespace Test.SqlLite;
 [SetUpFixture]
 public class TestFixture
 {
+    private TestApplication<Program>? _app;
+
     [OneTimeSetUp]
     public void Setup()
     {
-        var app = TestApplication<Program>
+        _app = TestApplication<Program>
             .Create();
 
-        app
+        _app
             .AddInMemorySqlLite()
                 .AddContext<WeatherForecastContext>();
 
-        app.Start();
+        _app.Start();
     }
+
+    [OneTimeTearDown]
+    public void TearDown() => _app?.Dispose();
 }

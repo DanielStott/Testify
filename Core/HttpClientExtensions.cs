@@ -36,7 +36,6 @@ public static class HttpClientExtensions
     public async static Task<(HttpResponseMessage Response, TResponse Content)> Delete<TResponse>(this HttpClient http, object requestUri) =>
         await Result<TResponse>(await http.DeleteAsync($"{requestUri}"));
 
-
     private static async Task<(HttpResponseMessage, TResponse)> Result<TResponse>(HttpResponseMessage response)
     {
         if (response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.Redirect)
