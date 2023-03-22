@@ -1,4 +1,5 @@
-﻿using Mongo2Go;
+﻿using Mongo;
+using Mongo2Go;
 using MongoDB.Driver;
 
 namespace MongoWebApi.Data;
@@ -7,7 +8,7 @@ public class WeatherForecastRepository
 {
     private readonly MongoClient _client;
 
-    public WeatherForecastRepository(MongoDbRunner runner) => _client = new MongoClient(runner.ConnectionString);
+    public WeatherForecastRepository(IMongoConnection mongoConnection) => _client = new MongoClient(mongoConnection.Connection);
 
     public void CreateCollection()
     {

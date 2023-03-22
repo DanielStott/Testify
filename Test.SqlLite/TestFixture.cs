@@ -12,12 +12,7 @@ public class TestFixture
     [OneTimeSetUp]
     public void Setup()
     {
-        _app = TestApplication<Program>
-            .Create((_, app) =>
-            {
-                app.AddInMemorySqlLite()
-                    .AddContext<WeatherForecastContext>();
-            });
+        _app = TestApplication<Program>.Create((_, app) => app.AddInMemorySqlLite().AddContext<WeatherForecastContext>());
 
         _app.Start();
     }
